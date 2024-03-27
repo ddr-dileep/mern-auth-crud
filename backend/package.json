@@ -1,0 +1,24 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "test task",
+  "main": "index.js",
+  "module": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ddr-dileep/mern-auth-crud-task.git"
+  },
+  "keywords": [
+    "test",
+    "task"
+  ],
+  "author": "Dileep",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ddr-dileep/mern-auth-crud-task/issues"
+  },
+  "homepage": "https://github.com/ddr-dileep/mern-auth-crud-task#readme"
+}
