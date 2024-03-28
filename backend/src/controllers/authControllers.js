@@ -42,10 +42,13 @@ const authControllers = {
       const { email, password } = req.body;
       const user = await User.findOne({ email });
       if (!user || !(await comparePassword(password, user.password))) {
-        return apiResponse.error(res, "Invalid password");
+        return apiResponse.error(res, "Invalid email or password");
       }
       const token = await generateToken(user?.email);
-      return apiResponse.success(res, { token });
+      return apiResponse.success(res, {
+        successMessage: "Logged in successfully",
+        token,
+      });
     } catch (error) {
       return apiResponse.validationErrors(res, error);
     }

@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import AppLoader from "../../components/loader/AppLoader";
 import { clearAllState } from "./../../redux/slices/userSlice";
+import { isAuthenticated } from "../../utils";
 
 const RegisterPage = () => {
   const [formValues, setFormValues] = useState({});
@@ -20,9 +21,13 @@ const RegisterPage = () => {
   const { error } = useSelector((state) => state.user);
   const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
+  const isAuthenticatedUser = isAuthenticated();
 
   useEffect(() => {
     let lat, long;
+    if (isAuthenticatedUser) {
+      navigate("/dashboard");
+    }
 
     fetchUserLocation((location, error) => {
       if (location) {

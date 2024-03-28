@@ -15,13 +15,11 @@ const userSlice = createSlice({
         state.status = "loading";
       })
       .addCase(authApiServices.register.fulfilled, (state, action) => {
-        console.log("register slices registered ", state, action);
         state.status = "success";
         state.user = action.payload;
         state.error = null;
       })
       .addCase(authApiServices.register.rejected, (state, action) => {
-        console.log("register slices registered ", action);
         state.status = "none";
         state.user = {};
         state.error = action?.payload?.error;
@@ -32,7 +30,6 @@ const userSlice = createSlice({
         state.status = "loading";
       })
       .addCase(authApiServices.login.fulfilled, (state, action) => {
-        console.log("login slices registered ", state, action);
         state.status = "success";
         state.user = action.payload;
       })

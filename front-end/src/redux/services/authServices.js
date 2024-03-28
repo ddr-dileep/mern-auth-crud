@@ -6,7 +6,6 @@ const authApiServices = {
     "/auth/register",
     async (data, { rejectWithValue }) => {
       try {
-        console.log(data);
         const response = await API.post("/auth/register", data);
         return response.data;
       } catch (error) {
@@ -18,8 +17,8 @@ const authApiServices = {
   ),
   login: createAsyncThunk("/auth/login", async (data, { rejectWithValue }) => {
     try {
-      console.log(data);
       const response = await API.post("/auth/login", data);
+      localStorage.setItem("auth", response?.data?.data?.token);
       return response.data;
     } catch (error) {
       return rejectWithValue({

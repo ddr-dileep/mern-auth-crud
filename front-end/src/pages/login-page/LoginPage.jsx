@@ -1,35 +1,70 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppForm from "../../components/form/AppForm";
 import { loginFields } from "../../utils/constants";
 import "./style.scss";
 import AppHeading from "../../components/heading/Heading";
 import AppButton from "./../../components/button/AppButton";
 import authApiServices from "../../redux/services/authServices";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import AppLoader from "../../components/loader/AppLoader";
+import Toastify from "../../components/notificatinoModel/Toastify";
+import { toast } from "react-toastify";
+import { clearAllState } from "../../redux/slices/userSlice";
+import { useNavigate } from "react-router-dom";
+import { isAuthenticated } from "../../utils";
 
 const LoginPage = () => {
   const [formValues, setFormValues] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  
+  const navigate = useNavigate();
+  const { error } = useSelector((state) => state.user);
+  const isAuthenticatedUser = isAuthenticated();
+
   const onInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
   };
 
+  useEffect(() => {
+    if (isAuthenticatedUser) {
+      navigate("/dashboard");
+    }
 
-  const loginFormSubmit = (event) => {
-    event.preventDefault();
-    setIsLoading(true);
+    if (error?.errors?.errorMessage) {
+      toast.dismiss();
+      toast.error(error.errors.errorMessage);
+    }
 
-    dispatch(authApiServices.login(formValues));
+    return ()=>{
+      dispatch(clearAllState());
+    }
+  }, [error]);
+
+  const loginFormSubmit = async (event) => {
+    try {
+      setIsLoading(true);
+
+      event.preventDefault();
+      setIsLoading(true);
+      const res = await dispatch(authApiServices.login(formValues));
+      if (res.payload?.success) {
+        toast.success(res.payload.data.successMessage);
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 1000);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error registering:>", error);
+    }
     setIsLoading(false);
   };
 
-
   return (
     <div className="login-page">
+      <Toastify />
+      {isLoading && <AppLoader />}
       <AppHeading title="Welcome back" className="login-page-heading" />
       <AppForm onInputChange={onInputChange} inputFields={loginFields} />
       <AppButton isDisabled={isLoading} onClick={loginFormSubmit}>

@@ -9,13 +9,17 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import HomeIcon from "@mui/icons-material/Home";
 import { Link } from "react-router-dom";
 import "./styles.scss";
+import { isAuthenticated } from "../../utils";
 
 function AppNavigation() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(isAuthenticated());
+
+  React.useEffect(() => {
+    setIsLoggedIn(isAuthenticated());
+  }, [window.location.pathname]);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -25,16 +29,7 @@ function AppNavigation() {
     setAnchorElUser(null);
   };
 
-  const handleLogin = () => {
-    // setIsLoggedIn(true);
-  };
-
-  const handleSignup = () => {
-    // setIsLoggedIn(true);
-  };
-
   const handleLogout = () => {
-    // setIsLoggedIn(false);
     setAnchorElUser(null);
   };
 
@@ -76,16 +71,14 @@ function AppNavigation() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {isLoggedIn && (
-                <>
-                  <MenuItem onClick={handleLogout}>
-                    <Typography textAlign="center">Profile</Typography>
-                  </MenuItem>
-                  <MenuItem onClick={handleLogout}>
-                    <Typography textAlign="center">Logout</Typography>
-                  </MenuItem>
-                </>
-              )}
+              {isLoggedIn && [
+                <MenuItem key="profile" onClick={handleLogout}>
+                  <Typography textAlign="center">Profile</Typography>
+                </MenuItem>,
+                <MenuItem key="logout" onClick={handleLogout}>
+                  <Typography textAlign="center">Logout</Typography>
+                </MenuItem>,
+              ]}
             </Menu>
           </Box>
         </Toolbar>
