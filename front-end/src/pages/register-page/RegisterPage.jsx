@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import AppLoader from "../../components/loader/AppLoader";
 import { clearAllState } from "./../../redux/slices/userSlice";
 import { isAuthenticated } from "../../utils";
+import PageTitle from "../../components/page-title/PageTitle";
 
 const RegisterPage = () => {
   const [formValues, setFormValues] = useState({});
@@ -24,23 +25,21 @@ const RegisterPage = () => {
   const isAuthenticatedUser = isAuthenticated();
 
   useEffect(() => {
-    let lat, long;
     if (isAuthenticatedUser) {
       navigate("/dashboard");
     }
 
     fetchUserLocation((location, error) => {
       if (location) {
-        lat = location.latitude;
-        long = location.longitude;
-        setFormValues({ ...formValues, lat, long });
+        const { latitude, longitude } = location;
+        setFormValues({ ...formValues, latitude, longitude });
       } else {
         console.error("Error fetching user location:", error);
       }
     });
-    return ()=>{
+    return () => {
       dispatch(clearAllState());
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -83,6 +82,7 @@ const RegisterPage = () => {
 
   return (
     <div className="register-page">
+      <PageTitle title="Auth - register" />
       {isLoading && <AppLoader />}
       <Toastify />
       <AppHeading

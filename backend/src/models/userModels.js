@@ -26,9 +26,14 @@ const userSchema = new mongoose.Schema({
   },
   profilePic: {
     type: String,
+    default: "https://w7.pngwing.com/pngs/205/731/png-transparent-default-avatar-thumbnail.png"
   },
-  lat: Number,
-  lang: Number,
+  latitude: {
+    type: Number,
+  },
+  longitude: {
+    type: Number,
+  },
 });
 
 const User = mongoose.model("User", userSchema);

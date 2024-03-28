@@ -9,13 +9,17 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./styles.scss";
-import { isAuthenticated } from "../../utils";
+import { isAuthenticated, removeAuthenticated } from "../../utils";
+import { useDispatch } from "react-redux";
+import { clearAllState } from "./../../redux/slices/userSlice";
 
 function AppNavigation() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [isLoggedIn, setIsLoggedIn] = React.useState(isAuthenticated());
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     setIsLoggedIn(isAuthenticated());
@@ -31,6 +35,9 @@ function AppNavigation() {
 
   const handleLogout = () => {
     setAnchorElUser(null);
+    removeAuthenticated();
+    dispatch(clearAllState()); 
+    navigate("/");
   };
 
   return (
@@ -72,9 +79,6 @@ function AppNavigation() {
               onClose={handleCloseUserMenu}
             >
               {isLoggedIn && [
-                <MenuItem key="profile" onClick={handleLogout}>
-                  <Typography textAlign="center">Profile</Typography>
-                </MenuItem>,
                 <MenuItem key="logout" onClick={handleLogout}>
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>,

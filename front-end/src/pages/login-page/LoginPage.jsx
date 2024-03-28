@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { clearAllState } from "../../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../../utils";
+import PageTitle from "../../components/page-title/PageTitle";
 
 const LoginPage = () => {
   const [formValues, setFormValues] = useState({});
@@ -63,6 +64,7 @@ const LoginPage = () => {
 
   return (
     <div className="login-page">
+      <PageTitle title="Auth - login" />
       <Toastify />
       {isLoading && <AppLoader />}
       <AppHeading title="Welcome back" className="login-page-heading" />

@@ -1,6 +1,6 @@
 export const registerFields = [
   {
-    name: "fullName",
+    name: "name",
     type: "type",
     placeholder: "Full name",
     id: "register-full-name",
@@ -62,3 +62,6 @@ export const loginFields = [
     id: "register-password",
   },
 ];
+
+export const defaultImageUrl =
+  "https://web-realcom.com/assets/upload/img/def_avatar.png";

@@ -24,4 +24,11 @@ authRouter.get(
   authControllers.getUserInfo
 );
 
+authRouter.put(
+  "/update",
+  verifyUserMiddleware,
+  uploadStorage.single("profilePic"),
+  authControllers.update
+);
+
 export default authRouter;

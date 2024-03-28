@@ -57,14 +57,53 @@ const authControllers = {
   getUserInfo: async (req, res) => {
     try {
       const userEmailId = req?.userInfo?.userEmail;
-      const user = await User.findOne({ email: userEmailId });
+      const user = await User.findOne({ email: userEmailId }).select(
+        "-password -_id"
+      );
       if (!user) return apiResponse.error(res, "User not found");
 
-      return apiResponse.success(res, { user });
+      return apiResponse.success(res, user);
     } catch (error) {
       return apiResponse.error(res, error.message);
     }
   },
+
+  update: async (req, res) => {
+    try {
+        const userEmailId = req.userInfo.userEmail;
+        const user = await User.findOne({ email: userEmailId });
+
+        if (!user) {
+            return apiResponse.error(res, "User not found");
+        }
+
+        const updatedFields = { ...req.body };
+        const newPassword = req.body.password ? await hashPassword(req.body.password) : undefined;
+
+        if (req?.file && req?.file?.path) {
+          const fileUrl = await cloudinaryFileUpload(req.file.path);
+          updatedFields.profilePic = fileUrl;
+        }
+
+        if (newPassword) {
+          updatedFields.password = newPassword;
+        }
+
+        const updatedUser = await User.findOneAndUpdate(
+          { email: userEmailId },
+          { $set: updatedFields },
+          { new: true }
+        ).select("-password -_id");
+
+        return apiResponse.success(res, {
+          successMessage: "User profile updated successfully",
+          user: updatedUser,
+        });
+    } catch (error) {
+        return apiResponse.validationErrors(res, error);
+    }
+},
+
 };
 
 export default authControllers;

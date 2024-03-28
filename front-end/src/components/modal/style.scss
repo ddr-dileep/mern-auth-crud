@@ -1,0 +1,20 @@
+.modal-container-box {
+    width: 50% !important;
+
+    @media (max-width:768px) {
+        width: 60% !important;
+    }
+
+    @media (max-width:554px) {
+        width: 70% !important;
+    }
+
+    @media (max-width:475px) {
+        width: 85% !important;
+    }
+
+    @media (max-width:425px) {
+        width: 95% !important;
+    }
+
+}

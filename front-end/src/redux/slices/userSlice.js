@@ -39,17 +39,29 @@ const userSlice = createSlice({
         state.error = action?.payload?.error;
       })
 
+      // get user profile data
+      .addCase(authApiServices.getUserInfo.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(authApiServices.getUserInfo.fulfilled, (state, action) => {
+        state.status = "success";
+        state.user = action.payload;
+      })
+      .addCase(authApiServices.getUserInfo.rejected, (state, action) => {
+        state.status = "none";
+        state.error = action?.payload?.error;
+      })
+
       // update the user
       .addCase(authApiServices.updateProfile.pending, (state) => {
         state.status = "loading";
       })
       .addCase(authApiServices.updateProfile.fulfilled, (state, action) => {
-        console.log("update slices registered ", state, action);
         state.status = "success";
-        state.user = action.payload;
+        state.user.successMessage = action?.payload?.data?.successMessage;
+        state.user = action?.payload?.data?.user;
       })
       .addCase(authApiServices.updateProfile.rejected, (state, action) => {
-        console.log("update slices registered ", action);
         state.status = "none";
         state.error = action?.payload?.error;
       });

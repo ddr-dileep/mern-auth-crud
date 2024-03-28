@@ -26,13 +26,22 @@ const authApiServices = {
       });
     }
   }),
+  getUserInfo: createAsyncThunk("/auth/user-info", async (rejectWithValue) => {
+    try {
+      const response = await API.get("/auth/user-info");
+      return response?.data?.data;
+    } catch (error) {
+      return rejectWithValue({
+        error: error?.response?.data,
+      });
+    }
+  }),
   updateProfile: createAsyncThunk(
-    "/auth/updateProfile",
-    async ({ id, data }, { rejectWithValue }) => {
+    "/auth/update",
+    async (data, { rejectWithValue }) => {
       try {
-        console.log(data);
-        const response = await API.put(`/auth/updateProfile/${id}`, data);
-        return response.data;
+        const response = await API.put("/auth/update", data);
+        return response?.data;
       } catch (error) {
         return rejectWithValue({
           error: error?.response?.data,

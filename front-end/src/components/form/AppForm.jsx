@@ -1,6 +1,12 @@
 import AppInputField from "../input/AppInput";
 
-const AppForm = ({ inputFields, onInputChange, encType, formErrors = {} }) => {
+const AppForm = ({
+  formValues = {},
+  inputFields,
+  onInputChange,
+  encType,
+  formErrors = {},
+}) => {
   return (
     <>
       <form encType={encType} method="post">
@@ -10,6 +16,7 @@ const AppForm = ({ inputFields, onInputChange, encType, formErrors = {} }) => {
               id={field?.id}
               key={field?.id}
               name={field?.name}
+              defaultValue={formValues[field?.name] || ""}
               type={field?.type}
               label={field?.placeholder}
               placeholder={field?.placeholder}
