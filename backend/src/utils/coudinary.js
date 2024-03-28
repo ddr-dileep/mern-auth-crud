@@ -1,18 +1,19 @@
 import { v2 as cloudinary } from "cloudinary";
 import { deleteFile } from "./multer.js";
 
-cloudinary.config({
-  cloud_name: "dcbiecgcl",
-  api_key: "344462162348942",
-  api_secret: "KCvZ8dDv3QT5zb5GH64QmjqPKLA",
-  secure: true,
-});
-
 const cloudinaryFileUpload = async (url) => {
   try {
+    cloudinary.config({
+      cloud_name: process.env.COUDINARY_API_NAME,
+      api_key: process.env.COUDINARY_API_KEY,
+      api_secret: process.env.COUDINARY_API_SECURITY,
+      secure: true,
+    });
+
     const result = await cloudinary.uploader.upload(url, {
       resource_type: "auto",
     });
+    console.log("result", result);
     // delete the file after successful upload
     await deleteFile(url);
     return result?.url;
