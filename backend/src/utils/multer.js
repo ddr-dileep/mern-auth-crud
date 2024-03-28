@@ -1,4 +1,5 @@
 import multer from "multer";
+import fs from "fs";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -9,6 +10,15 @@ const storage = multer.diskStorage({
   },
 });
 
-const uploadStorage = multer({ storage: storage });
+export const uploadStorage = multer({ storage: storage });
 
-export default uploadStorage;
+// delete the file after upload is complete or an error is thrown
+export const deleteFile = (url)=>{
+  fs.unlink(url, (err) => {
+    if (err) {
+      console.error("Error deleting file:", err);
+    } else {
+      console.log("File deleted successfully");
+    }
+  });
+}

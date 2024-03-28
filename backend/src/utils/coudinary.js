@@ -1,10 +1,10 @@
 import { v2 as cloudinary } from "cloudinary";
-import fs from "fs";
+import { deleteFile } from "./multer.js";
 
 cloudinary.config({
-  cloud_name: process.env.COUDINARY_API_NAME,
-  api_key: process.env.COUDINARY_API_KEY,
-  api_secret: process.env.COUDINARY_API_SECURITY,
+  cloud_name: "dcbiecgcl",
+  api_key: "344462162348942",
+  api_secret: "KCvZ8dDv3QT5zb5GH64QmjqPKLA",
   secure: true,
 });
 
@@ -14,15 +14,11 @@ const cloudinaryFileUpload = async (url) => {
       resource_type: "auto",
     });
     // delete the file after successful upload
-     fs.unlink(url, (err) => {
-       if (err) {
-         console.error("Error deleting file:", err);
-       } else {
-         console.log("File deleted successfully");
-       }
-     });
+    await deleteFile(url);
     return result?.url;
   } catch (error) {
+    // delete the file if failed to upload
+    await deleteFile(url);
     console.error("Error uploading file:", error.message);
   }
 };

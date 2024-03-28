@@ -12,3 +12,9 @@
   display: flex;
   justify-content: space-between;
 }
+
+a {
+  width:auto ;
+  text-decoration: none;
+  color: inherit;
+}

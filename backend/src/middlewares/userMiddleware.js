@@ -1,12 +1,12 @@
 import apiResponse from "../utils/apiResponse.js";
-import cloudinaryFileUpload from "../utils/coudinary.js";
 
 const userMiddleware = {
   registerMiddleware: async (req, res, next) => {
     try {
       const { email, mobile, password, zipCode } = req.body;
-      if (!mobile) return apiResponse.error(res, "Mobile is required");
-      else if (!email) return apiResponse.error(res, "Email is required");
+      if (!email) return apiResponse.error(res, "Email is required");
+      else if (!mobile)
+        return apiResponse.error(res, "Mobile number is required");
       else if (!password) return apiResponse.error(res, "Password is required");
       else if (!zipCode) return apiResponse.error(res, "Zip Code is required");
       return next();

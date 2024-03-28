@@ -2,7 +2,7 @@ import { Router } from "express";
 import authControllers from "../controllers/authControllers.js";
 import userMiddleware from "../middlewares/userMiddleware.js";
 import { verifyUserMiddleware } from "../middlewares/authMiddleware.js";
-import uploadStorage from "../utils/multer.js";
+import { uploadStorage } from "../utils/multer.js";
 const authRouter = Router();
 
 authRouter.post(
@@ -11,6 +11,7 @@ authRouter.post(
   userMiddleware.registerMiddleware,
   authControllers.register
 );
+
 authRouter.post(
   "/login",
   userMiddleware.loginMiddleware,
