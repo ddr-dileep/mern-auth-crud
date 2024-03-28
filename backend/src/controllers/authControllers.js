@@ -1,14 +1,20 @@
 import User from "../models/userModels.js";
 import apiResponse from "../utils/apiResponse.js";
+import cloudinaryFileUpload from "../utils/coudinary.js";
 import { comparePassword, hashPassword } from "../utils/encrypt.js";
 import { generateToken } from "./../middlewares/authMiddleware.js";
 
 const authControllers = {
   register: async (req, res) => {
     try {
+      let fileUrl = '';
+      if (req?.file) {
+        fileUrl = await cloudinaryFileUpload(req?.file?.path);
+      }
       const reqBody = {
         ...req.body,
         password: await hashPassword(req.body?.password),
+        profilePic: fileUrl,
       };
       const newUser = new User(reqBody);
       await newUser.save();
