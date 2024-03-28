@@ -4,7 +4,9 @@ import authApiServices from "../services/authServices";
 const userSlice = createSlice({
   name: "user",
   initialState: {},
-  reducers: {},
+  reducers: {
+    clearAllState: () => ({}),
+  },
   user: {},
   extraReducers(builder) {
     builder
@@ -16,10 +18,12 @@ const userSlice = createSlice({
         console.log("register slices registered ", state, action);
         state.status = "success";
         state.user = action.payload;
+        state.error = null;
       })
       .addCase(authApiServices.register.rejected, (state, action) => {
         console.log("register slices registered ", action);
         state.status = "none";
+        state.user = {};
         state.error = action?.payload?.error;
       })
 
@@ -55,4 +59,5 @@ const userSlice = createSlice({
   },
 });
 
+export const { clearAllState } = userSlice.actions;
 export default userSlice.reducer;

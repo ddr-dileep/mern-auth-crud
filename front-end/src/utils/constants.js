@@ -32,7 +32,7 @@ export const registerFields = [
     id: "register-zip-code-number",
   },
   {
-    name: "profile",
+    name: "profilePic",
     type: "file",
     placeholder: "Profile",
     id: "register-profile-number",
