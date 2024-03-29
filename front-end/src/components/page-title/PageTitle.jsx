@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const PageTitle = ({ title }) => {
+export const PageTitle = ({ title }) => {
   useEffect(() => {
     document.title = title;
     return () => {
@@ -10,5 +10,3 @@ const PageTitle = ({ title }) => {
 
   return null;
 };
-
-export default PageTitle;

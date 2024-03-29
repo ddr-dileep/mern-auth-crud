@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.scss";
 import { defaultImageUrl } from "../../../utils/constants";
-import AppHeading from "../../../components/heading/Heading";
+import { AppHeading } from "../../../components";
 
 const MemberList = ({listData}) => {
   return (
@@ -14,7 +14,7 @@ const MemberList = ({listData}) => {
         {listData &&
           listData.map((member) => {
             return (
-              <div className="member_list-box">
+              <div className="member_list-box" key={member?.email}>
                 <div className="member_list-box-left">
                   <div className="member_list-header-left">
                     <h3 className="member_list-header-name">

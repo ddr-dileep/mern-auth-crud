@@ -1,6 +1,6 @@
 import "./styles.scss";
 
-const AppLoader = () => {
+export const AppLoader = () => {
   return (
     <div className="loader-container">
       <div className="loader">
@@ -13,5 +13,3 @@ const AppLoader = () => {
     </div>
   );
 };
-
-export default AppLoader;

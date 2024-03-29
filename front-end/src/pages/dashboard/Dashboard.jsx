@@ -4,18 +4,12 @@ import { useNavigate } from "react-router-dom";
 import authApiServices from "../../redux/services/authServices";
 import { useDispatch, useSelector } from "react-redux";
 import "./styles.scss";
-import AppModal from "../../components/modal/Modal";
-import AppButton from "../../components/button/AppButton";
-import AppForm from "../../components/form/AppForm";
 import { defaultImageUrl, registerFields } from "../../utils/constants";
 import { fetchUserLocation } from "../../utils/userLocation";
-import Toastify from "../../components/notificatinoModel/Toastify";
-import AppLoader from "./../../components/loader/AppLoader";
 import { toast } from "react-toastify";
-import PageTitle from "../../components/page-title/PageTitle";
 import MemberList from "./components/MemberList";
 import locationApiServices from "../../redux/services/locationServices";
-import AppHeading from "../../components/heading/Heading";
+import { AppButton, AppForm, AppLoader, AppModal, PageTitle, Toastify } from "../../components";
 
 const Dashboard = () => {
   const [formValues, setFormValues] = useState({});

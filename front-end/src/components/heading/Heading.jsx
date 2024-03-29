@@ -1,6 +1,6 @@
 import "./heading.scss";
 
-const AppHeading = ({ title, subtitle, className }) => {
+export const AppHeading = ({ title, subtitle, className }) => {
   return (
     <>
       <h2 className={`${className} app-heading`}>{title}</h2>
@@ -8,5 +8,3 @@ const AppHeading = ({ title, subtitle, className }) => {
     </>
   );
 };
-
-export default AppHeading;

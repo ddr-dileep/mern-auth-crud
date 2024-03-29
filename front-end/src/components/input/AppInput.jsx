@@ -1,7 +1,7 @@
 import TextField from "@mui/material/TextField";
 import "./styles.scss";
 
-const AppInputField = ({
+export const AppInputField = ({
   isError,
   className,
   isRequired,
@@ -31,5 +31,3 @@ const AppInputField = ({
     />
   );
 };
-
-export default AppInputField;

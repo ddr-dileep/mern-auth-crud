@@ -1,6 +1,6 @@
-import AppInputField from "../input/AppInput";
+import { AppInputField } from "../input/AppInput";
 
-const AppForm = ({
+export const AppForm = ({
   formValues = {},
   inputFields,
   onInputChange,
@@ -30,4 +30,3 @@ const AppForm = ({
     </>
   );
 };
-export default AppForm;

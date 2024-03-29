@@ -5,7 +5,7 @@ import './index.css'
 import store from './redux/store.js';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from "react-router-dom";
-import AppNavigation from './components/navigation/Navigation.jsx';
+import { AppNavigation } from './components/index.js';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>

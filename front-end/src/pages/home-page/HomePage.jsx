@@ -1,8 +1,7 @@
 import React from "react";
 import "./styles.scss";
 import { Link } from "react-router-dom";
-import AppButton from "../../components/button/AppButton";
-import PageTitle from "../../components/page-title/PageTitle";
+import { AppButton, PageTitle } from "./../../components";
 
 const HomePage = () => {
   return (

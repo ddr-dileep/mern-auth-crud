@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import PropTypes from "prop-types";
 import "./style.scss";
 
-const AppButton = ({
+export const AppButton = ({
   variant = "outlined",
   children,
   isDisabled,
@@ -21,5 +21,3 @@ const AppButton = ({
     </Button>
   );
 };
-
-export default AppButton;

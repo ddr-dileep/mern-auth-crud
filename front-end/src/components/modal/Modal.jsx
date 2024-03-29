@@ -17,7 +17,7 @@ const style = {
   zIndex: 1,
 };
 
-export default function AppModal({ children, isOpen, handleClose, title }) {
+export const AppModal = ({ children, isOpen, handleClose, title }) => {
   return (
     <Modal
       open={isOpen}
@@ -33,4 +33,4 @@ export default function AppModal({ children, isOpen, handleClose, title }) {
       </Box>
     </Modal>
   );
-}
+};

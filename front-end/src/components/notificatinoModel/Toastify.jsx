@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 
-const Toastify = () => {
+export const Toastify = () => {
   return (
     <ToastContainer
       position="top-center"
@@ -18,6 +18,4 @@ const Toastify = () => {
       transition:Bounce
     />
   );
-}
-
-export default Toastify;
+};

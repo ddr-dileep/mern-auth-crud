@@ -1,19 +1,14 @@
 import React, { useState, useEffect } from "react";
-import AppForm from "../../components/form/AppForm";
 import { registerFields } from "../../utils/constants";
 import "./styles.scss";
-import AppHeading from "./../../components/heading/Heading";
-import AppButton from "../../components/button/AppButton";
 import { useDispatch, useSelector } from "react-redux";
 import authApiServices from "./../../redux/services/authServices";
 import { fetchUserLocation } from "../../utils/userLocation";
-import Toastify from "../../components/notificatinoModel/Toastify";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import AppLoader from "../../components/loader/AppLoader";
 import { clearAllState } from "./../../redux/slices/userSlice";
 import { isAuthenticated } from "../../utils";
-import PageTitle from "../../components/page-title/PageTitle";
+import { AppButton, AppForm, AppHeading, AppLoader, PageTitle, Toastify } from "../../components";
 
 const RegisterPage = () => {
   const [formValues, setFormValues] = useState({});

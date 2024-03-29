@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
-import AppForm from "../../components/form/AppForm";
 import { loginFields } from "../../utils/constants";
 import "./style.scss";
-import AppHeading from "../../components/heading/Heading";
-import AppButton from "./../../components/button/AppButton";
 import authApiServices from "../../redux/services/authServices";
 import { useDispatch, useSelector } from "react-redux";
-import AppLoader from "../../components/loader/AppLoader";
-import Toastify from "../../components/notificatinoModel/Toastify";
 import { toast } from "react-toastify";
 import { clearAllState } from "../../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { isAuthenticated } from "../../utils";
-import PageTitle from "../../components/page-title/PageTitle";
+import { AppButton, AppForm, AppHeading, AppLoader, PageTitle, Toastify } from "../../components";
 
 const LoginPage = () => {
   const [formValues, setFormValues] = useState({});

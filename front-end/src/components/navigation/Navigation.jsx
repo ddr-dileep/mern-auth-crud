@@ -15,7 +15,7 @@ import { isAuthenticated, removeAuthenticated } from "../../utils";
 import { useDispatch } from "react-redux";
 import { clearAllState } from "./../../redux/slices/userSlice";
 
-function AppNavigation() {
+export const AppNavigation = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [isLoggedIn, setIsLoggedIn] = React.useState(isAuthenticated());
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ function AppNavigation() {
   const handleLogout = () => {
     setAnchorElUser(null);
     removeAuthenticated();
-    dispatch(clearAllState()); 
+    dispatch(clearAllState());
     navigate("/");
   };
 
@@ -89,5 +89,4 @@ function AppNavigation() {
       </Container>
     </AppBar>
   );
-}
-export default AppNavigation;
+};
