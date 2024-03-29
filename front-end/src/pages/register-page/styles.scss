@@ -1,13 +1,21 @@
-.register-page{
-    width: 60%;
-    margin: 30px auto;
-    min-height: 80vh;
+.register-page {
+  width: 60%;
+  margin: 30px auto;
+  min-height: 80vh;
 
-    &-heading{
-        padding: 20px 0;
-    }
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 
-    &-form-button{
-        margin-top: 10px !important;
-    }
+  @media (max-width: 554px) {
+    width: 95%;
+  }
+
+  &-heading {
+    padding: 20px 0;
+  }
+
+  &-form-button {
+    margin-top: 10px !important;
+  }
 }

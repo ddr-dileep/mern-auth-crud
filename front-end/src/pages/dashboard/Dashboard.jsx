@@ -13,6 +13,9 @@ import Toastify from "../../components/notificatinoModel/Toastify";
 import AppLoader from "./../../components/loader/AppLoader";
 import { toast } from "react-toastify";
 import PageTitle from "../../components/page-title/PageTitle";
+import MemberList from "./components/MemberList";
+import locationApiServices from "../../redux/services/locationServices";
+import AppHeading from "../../components/heading/Heading";
 
 const Dashboard = () => {
   const [formValues, setFormValues] = useState({});
@@ -21,8 +24,12 @@ const Dashboard = () => {
   const isAuthenticatedUser = isAuthenticated();
   const [isOpen, setIsOpen] = useState(false);
   const { user, error } = useSelector((state) => state?.user);
+  const { nearByUsers } = useSelector((state) => state);
   const [isLoading, setIsLoading] = useState(true);
   const [profileDetails, setProfileDetails] = useState(user);
+  const nearRestUser = nearByUsers?.nearestUsers?.data;
+
+  console.log("nearRestUser", nearRestUser);
 
   async function getCurrentUser() {
     try {
@@ -42,6 +49,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    let latitude, longitude;
     if (!isAuthenticatedUser) {
       navigate("/login");
     }
@@ -53,12 +61,19 @@ const Dashboard = () => {
 
     fetchUserLocation((location, error) => {
       if (location) {
-        const { latitude, longitude } = location;
+        (latitude = location.latitude), (longitude = location.longitude);
         setFormValues({ ...formValues, latitude, longitude });
       } else {
         console.error("Error fetching user location:", error);
       }
     });
+
+    dispatch(
+      locationApiServices.nearByUser({
+        latitude,
+        longitude,
+      })
+    );
   }, []);
 
   useEffect(() => {
@@ -117,7 +132,10 @@ const Dashboard = () => {
           <div className="user_dashboard-container-left-top">
             <div className="user_dashboard-container-left-top-img">
               <a href={profileDetails?.profilePic} target="_blank">
-                <img className="user-img" src={profileDetails?.profilePic || defaultImageUrl} />
+                <img
+                  className="user-img"
+                  src={profileDetails?.profilePic || defaultImageUrl}
+                />
               </a>
             </div>
             <h3 className="user_dashboard-container-left-top-name">
@@ -154,6 +172,8 @@ const Dashboard = () => {
           </AppButton>
         </div>
       </div>
+
+      <MemberList listData={nearRestUser} />
 
       <AppModal isOpen={isOpen} handleClose={handleClose} title="Edit profile">
         <div className="user_dashboard-container-edit_profile">

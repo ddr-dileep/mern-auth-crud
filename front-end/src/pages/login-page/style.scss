@@ -1,9 +1,17 @@
-.login-page{
-    width: 60%;
-    margin: 30px auto;
-    min-height: 80vh;
+.login-page {
+  width: 60%;
+  margin: 30px auto;
+  min-height: 80vh;
 
-    &-heading{
-        padding: 20px 0;
-    }
+  @media (max-width: 768px) {
+    width: 80%;
+  }
+
+  @media (max-width: 554px) {
+    width: 95%;
+  }
+
+  &-heading {
+    padding: 20px 0;
+  }
 }
