@@ -93,7 +93,7 @@ const authControllers = {
           { email: userEmailId },
           { $set: updatedFields },
           { new: true }
-        ).select("-password -_id");
+        ).select("-password -_id -__V");
 
         return apiResponse.success(res, {
           successMessage: "User profile updated successfully",

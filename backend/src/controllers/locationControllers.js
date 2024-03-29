@@ -25,7 +25,7 @@ const locationControllers = {
     const { latitude, longitude } = req.body;
 
     try {
-      const users = await User.find({});
+      const users = await User.find({}).select("-password -_id -__v");
 
       const usersWithDistances = users.map((user) => {
         const distance = calculateDistance(
