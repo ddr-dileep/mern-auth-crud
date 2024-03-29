@@ -1,4 +1,4 @@
-const allowedOrigins = ["http://localhost:5173", "http://another-example.com"];
+const allowedOrigins = ["http://localhost:5173", "https://mern-auth-crud-be.onrender.com"];
 
 export const corsOptions = {
   origin: allowedOrigins,
