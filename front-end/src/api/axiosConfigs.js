@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:8080/api/v1",
+  baseURL: "https://mern-auth-crud-be.onrender.com/api/v1",
   withCredentials: true,
 });
 
